@@ -3,7 +3,6 @@ name: "CodeQL Scan"
 on:
   workflow_dispatch:
   
-
 jobs:
   analyze:
     name: Analyze
@@ -19,6 +18,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac #v4.0.0
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
@@ -27,13 +27,16 @@ jobs:
         config: |
           paths-ignore:
             - 'data/static/codefixes'
+
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-      - name: Upload CodeQL Database Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: codeql-database
-          path: /home/runner/work/_temp/codeql_databases/javascript.zip
 
+    # Adiciona a etapa para salvar o artefato
+    - name: Upload CodeQL Database Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: codeql-database
+        path: /home/runner/work/_temp/codeql_databases  # Caminho do diretório onde a base de dados do CodeQL é armazenada
