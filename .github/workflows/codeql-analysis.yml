@@ -17,7 +17,7 @@ jobs:
         language: [ 'javascript-typescript' ]
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4 # Atualizado para a versão mais recente
+      uses: actions/checkout@v4 # versão mais recente do checkout
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
@@ -34,9 +34,9 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
-    # Adiciona a etapa para salvar o artefato usando a versão v3
+    # Upload do artefato usando a versão v4
     - name: Upload CodeQL Database Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: codeql-database
         path: /home/runner/work/_temp/codeql_databases  # Caminho do diretório onde a base de dados do CodeQL é armazenada
